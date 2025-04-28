@@ -61,6 +61,15 @@ jobs:
         run: |
           pip install -r docs/requirements.txt
 
+      - name: Get test-data version
+        id: test-data-version
+        uses: pozetroninc/github-action-get-latest-release@v0.8.0
+        with:
+          repository: mala-project/test-data
+
+      - name: Print version
+        run: echo "Latest test-data version is ${{ steps.test-data-version.outputs.release }}"
+
       - name: Build API and docs
         run: |
           make -C docs apidocs
